@@ -6,7 +6,6 @@ const refs = {
     check: document.querySelector('#theme-switch-toggle'),
     body: document.querySelector('body'),
     menu: document.querySelector('.js-menu')
-    
 }
 
 const Theme = {
@@ -14,32 +13,30 @@ const Theme = {
     DARK: 'dark-theme',
 };
 
-a()
+changeThemeStartup()
 markupMenu(menu)
 addEventListener('click', onCheck)
 
-function a() {
+function changeThemeStartup() {
     if (!localStorage.getItem('theme')) {
         return
     }
     refs.body.classList.add(localStorage.getItem('theme'))
-    if (localStorage.getItem('theme') === 'dark-theme') {
-        refs.check.checked = true
-    } else {
-        refs.check.checked = false
-    }
+    refs.check.checked = localStorage.getItem('theme') === 'dark-theme'
 }
 
 function onCheck(e) {
     if (e.target.id !== "theme-switch-toggle") {
         return
     }
+
     if (refs.check.checked) {
         refs.body.classList.remove(Theme.LIGHT)
         refs.body.classList.add(Theme.DARK)
         localStorage.setItem('theme', Theme.DARK);
         return
     }
+
     refs.body.classList.remove(Theme.DARK)
     refs.body.classList.add(Theme.LIGHT)
     localStorage.setItem('theme', Theme.LIGHT);
